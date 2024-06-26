@@ -55,9 +55,10 @@ def get_youtube_playlist_tracks(youtube, playlist_id):
             video_title = item["snippet"]["title"]
             track, artist = extract_track_and_artist(video_title)
 
-            # Use channel title as artist if artist is not found
+            #Gets "Topic" mostly i should add if else statement for this
+            """# Use channel title as artist if artist is not found
             if not artist:
-                artist = channel_title
+                artist = channel_title"""
 
             if track:
                 tracks.append({"name": track, "artist": artist})
