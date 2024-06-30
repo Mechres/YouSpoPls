@@ -174,6 +174,10 @@ def main():
             add_track_to_spotify_playlist(sp, spotify_playlist_id, track['name'], track['artist'])
         else:
             print(f"Could not find on Spotify: {track['name']} by {track['artist']}")
+            # Save song names that couldn't be found on Spotify.
+            noFind = open("NoFind.txt", "a")
+            noFind.write(f"{track['artist']} - {track['name']}")
+            noFind.close()
 
 
 if __name__ == "__main__":
