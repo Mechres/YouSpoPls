@@ -55,11 +55,18 @@ def get_youtube_playlist_tracks(youtube, playlist_id):
             video_title = item["snippet"]["title"]
             track, artist = extract_track_and_artist(video_title)
 
-            #Gets "Topic" mostly i should add if else statement for this
-            """# Use channel title as artist if artist is not found
+            # Use channel title as artist if artist is not found
             if not artist:
-                artist = channel_title"""
-
+                #Check if "Topic" is in the channel name.
+                if "Topic" in channel_title:
+                    ###print("Topic is in the name")
+                    ###print(channel_title)
+                    #Replace "Topic" with empty.
+                    channel_title = channel_title.replace(" - Topic", "")
+                    #print(channel_title)
+                    artist = channel_title
+                else:
+                    artist = channel_title
             if track:
                 tracks.append({"name": track, "artist": artist})
 
@@ -120,7 +127,6 @@ def create_spotify_playlist(spotify, playlist_name, public=True):
 
 
 def add_track_to_spotify_playlist(spotify, playlist_id, track, artist):
-
     if artist:  # if there is an artist then search with title and artist
         track_uri = search_spotify(sp, track, artist)
     else:  # if no artist present then just search for the song
